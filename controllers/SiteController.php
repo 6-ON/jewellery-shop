@@ -10,8 +10,8 @@ class SiteController extends Controller
 {
     public function home()
     {
-        $p = ['name'=>"amine"];
-        return $this->render('home',$p);
+        $this->setLayout('homeLayout');
+        return $this->render('home');
     }
 
     public function contact()
@@ -19,6 +19,18 @@ class SiteController extends Controller
         return $this->render('contact');
 
     }
+    public function about()
+    {
+        return $this->render('about');
+
+    }
+    public function gallery()
+    {
+        return $this->render('gallery');
+
+    }
+
+    
 
     public function handlingContact(Request $request)
     {

@@ -23,16 +23,23 @@ $app = new Application(dirname(__DIR__), $config);
 
 
 $app->router->get('/', [SiteController::class, 'home']);
+
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handlingContact']);
 
+$app->router->get('/about', [SiteController::class, 'about']);
+
 $app->router->get('/logout', [AuthController::class, 'logout']);
+
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
-$app->router->get('/profile', [AuthController::class, 'profile']);
+$app->router->get('/dashboard', [AuthController::class, 'dashboard']);
+
+
+$app->router->get('/gallery', [SiteController::class, 'gallery']);
 
 $app->run();
