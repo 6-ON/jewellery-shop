@@ -1,3 +1,8 @@
+<?php
+use app\widgets\Widget;
+
+?>
+
 <div class="item_section layout_padding2">
     <div class="heading_container d-flex justify-content-center">
         <h2>
@@ -67,116 +72,15 @@
         </div>
         <div class="products-container">
             <div class="price_container">
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/p-1.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/i-2.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/i-3.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="price_container">
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/p-1.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/i-2.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Diamond Ring
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/i-3.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            $<span>1000.00</span>
-                        </h5>
-                        <a href="">
-                            Buy Now
-                        </a>
-                    </div>
-                </div>
+                <!-- here i generate products -->
+                
+                <?php foreach ($products as $product) {
+                    echo Widget::productBox($product);
+                } ?>
+
+
+            
+            
             </div>
         </div>
     </div>
