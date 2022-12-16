@@ -10,6 +10,7 @@ class Field
     public const TYPE_EMAIL = 'email';
     public const TYPE_PASSWORD = 'password';
     public const TYPE_NUMBER = 'number';
+    public const TYPE_FILE = 'file';
 
 
     public Model $model;
@@ -41,6 +42,11 @@ class Field
     public function numberField(): Field
     {
         $this->type = self::TYPE_NUMBER;
+        return $this;
+    }
+    public function fileField(): Field
+    {
+        $this->type = self::TYPE_FILE;
         return $this;
     }
 
