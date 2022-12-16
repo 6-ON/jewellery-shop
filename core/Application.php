@@ -43,7 +43,8 @@ class Application
         try {
             echo $this->router->resolve();
         } catch (\Exception $exception) {
-            self::$app->response->setStatusCode($exception->getCode());
+            $code = is_int($exception->getCode()) ? $exception->getCode() : 500;
+            self::$app->response->setStatusCode($code);
             echo self::$app->router->renderView('error',
                 ['exception' => $exception
             ]);
