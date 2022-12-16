@@ -38,6 +38,11 @@ $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
 $app->router->get('/dashboard', [AuthController::class, 'dashboard']);
+$app->router->post('/dashboard', [AuthController::class, 'dashboard']);
+
+
+$app->router->get('/product', [AuthController::class, 'product']);
+$app->router->post('/product', [AuthController::class, 'product']);
 
 
 $app->router->get('/gallery', [SiteController::class, 'gallery']);
