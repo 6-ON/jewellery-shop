@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\models\Category;
+use app\models\Product;
 
 class SiteController extends Controller
 {
@@ -17,20 +19,27 @@ class SiteController extends Controller
     public function contact()
     {
         return $this->render('contact');
-
     }
     public function about()
     {
         return $this->render('about');
-
     }
-    public function gallery()
+    public function gallery(Request $request)
     {
-        return $this->render('gallery');
-
+        if ($request->isGet()) {
+            $products = Product::getAll(false);
+            $categories = Category::getAll(false);
+            return $this->render(
+                'gallery',
+                [
+                    'products' => $products,
+                    'categories' => $categories
+                ]
+            );
+        }
     }
 
-    
+
 
     public function handlingContact(Request $request)
     {
@@ -39,5 +48,4 @@ class SiteController extends Controller
         echo "</pre>";
         exit();
     }
-
 }

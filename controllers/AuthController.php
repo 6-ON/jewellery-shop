@@ -4,16 +4,20 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
+use app\core\exception\NotFoundException;
 use app\middlewares\AdminMiddleware;
 use app\core\Request;
 use app\core\Response;
+use app\models\Category;
 use app\models\LoginForm;
+use app\models\Product;
 use app\models\User;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
+        
         $this->registerMiddleware(new AdminMiddleware(['dashboard']));
     }
 
@@ -23,7 +27,6 @@ class AuthController extends Controller
             Application::$app->logout();
             $response->redirect('/');
         }
-
     }
     public function login(Request $request, Response $response)
     {
@@ -60,11 +63,51 @@ class AuthController extends Controller
         ]);
     }
 
-    public function dashboard(Request $request)
+    public function dashboard(Request $request, Response $response)
     {
         $this->setLayout('main');
-        if ($request->isGet()){
-            return $this->render('dashboard');
+
+        if ($request->isPost()) {
+            extract($request->getBody());
+            if (!empty($edit)) {
+                $response->redirect("/product?id=$edit");
+                return;
+            } else if (!empty($delete)) {
+                if (Product::delete(['id' => $delete])) {
+                    Application::$app->session->setFlash('deleted', 'Product has been deleted');
+                }
+            } else {
+                throw new NotFoundException;
+            }
+        }
+        $products = Product::getAll(true);
+        $labels = (new Product())->labels();
+        return $this->render(
+            'dashboard',
+            [
+                'products' => $products,
+                'columns' => $labels
+            ]
+        );
+    }
+    public function product(Request $request, Response $response)
+    {
+        $this->setLayout('main');
+        
+        if ($request->isPost()) {
+
+            // $response->redirect('/dashsboard');
+            // Product::update(['label' => 'Royal Ringo', 'price' => 124.89], ['id' => 100012]);
+        } else {
+            $idProd = $request->getBody()['id']?? throw new NotFoundException;
+            $product = Product::findOne(['id' => $idProd]) ?? throw new NotFoundException;
+            $product = $product ?? new Product;
+            return $this->render(
+                'product',
+                [
+                    'product' => $product,
+                ]
+            );
         }
     }
 }
