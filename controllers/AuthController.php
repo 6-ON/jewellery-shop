@@ -70,7 +70,7 @@ class AuthController extends Controller
         if ($request->isPost()) {
             extract($request->getBody());
             if (!empty($edit)) {
-                $response->redirect("/product?id=$edit");
+                $response->redirect("/editProduct?id=$edit");
                 return;
             } else if (!empty($delete)) {
                 if (Product::delete(['id' => $delete])) {
@@ -90,21 +90,48 @@ class AuthController extends Controller
             ]
         );
     }
-    public function product(Request $request, Response $response)
+    public function createProduct(Request $request, Response $response)
     {
         $this->setLayout('main');
         
         if ($request->isPost()) {
+            $product = new Product();
+            $product->loadData($request->getBody());
+            if ($product->validate() && $product->save()) {
+                Application::$app->session->setFlash('created', 'a Product has been created');
+                $response->redirect("/dashboard");
+            }
+            // $response->redirect('/dashsboard');
+            // Product::update(['label' => 'Royal Ringo', 'price' => 124.89], ['id' => 100012]);
+        } else {
+            return $this->render(
+                'product',
+                [
+                    'product' => new Product,
+                ]
+            );
+        }
+    }
+    public function editProduct(Request $request, Response $response)
+    {
+        $this->setLayout('main');
+        
+        if ($request->isPost()) {
+
+            $product = new Product();
             echo '<pre>';
             var_dump($request->getBody());
             echo '</pre>';
             exit;
-            // $response->redirect('/dashsboard');
+            $product->loadData($request->getBody());
+            
+            if ($product->validate()) {
+                $response->redirect("/dashboard");
+            }
             // Product::update(['label' => 'Royal Ringo', 'price' => 124.89], ['id' => 100012]);
         } else {
             $idProd = $request->getBody()['id']?? throw new NotFoundException;
             $product = Product::findOne(['id' => $idProd]) ?? throw new NotFoundException;
-            $product = $product ?? new Product;
             return $this->render(
                 'product',
                 [
