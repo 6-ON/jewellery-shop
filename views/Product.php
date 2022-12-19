@@ -15,6 +15,8 @@ use app\core\Form\Form;
         <?php echo $form->field($product, 'label') ?>
         <?php echo $form->field($product, 'price')->numberField() ?>
         <?php echo $form->field($product, 'quantity')->numberField() ?>
+        <?php echo $form->select($product, 'categoryId',$cat_ds) ?>
+
         <?php echo $form->field($product, 'image')->fileField() ?>
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Submit</button>

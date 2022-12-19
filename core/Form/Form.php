@@ -19,6 +19,10 @@ class Form
     {
         return new Field($model, $attr);
     }
+    public function select(Model $model, $attr,$sourceModel)
+    {
+        return new Select($model, $attr,$sourceModel);
+    }
 
 
 }

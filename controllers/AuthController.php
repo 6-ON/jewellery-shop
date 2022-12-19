@@ -95,7 +95,10 @@ class AuthController extends Controller
         $this->setLayout('main');
         
         if ($request->isPost()) {
-
+            echo '<pre>';
+            var_dump($request->getBody());
+            echo '</pre>';
+            exit;
             // $response->redirect('/dashsboard');
             // Product::update(['label' => 'Royal Ringo', 'price' => 124.89], ['id' => 100012]);
         } else {
