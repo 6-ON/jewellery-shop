@@ -4,12 +4,12 @@ use app\core\DbModel;
 
 class Product extends DbModel {
 
-    public string $label;
-    public $price;
-    public int $quantity;
-    public string $image;
+    public string $label = '';
+    public $price = 0;
+    public int $quantity = 0;
+    public string $image = '';
 
-    public int $categoryId;
+    public int $categoryId = 100000;
 
     public static function primaryKey(): string
     {

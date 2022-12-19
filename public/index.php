@@ -41,8 +41,11 @@ $app->router->get('/dashboard', [AuthController::class, 'dashboard']);
 $app->router->post('/dashboard', [AuthController::class, 'dashboard']);
 
 
-$app->router->get('/product', [AuthController::class, 'product']);
-$app->router->post('/product', [AuthController::class, 'product']);
+$app->router->get('/createProduct', [AuthController::class, 'createProduct']);
+$app->router->post('/createProduct', [AuthController::class, 'createProduct']);
+
+$app->router->get('/editProduct', [AuthController::class, 'editProduct']);
+$app->router->post('/editProduct', [AuthController::class, 'editProduct']);
 
 
 $app->router->get('/gallery', [SiteController::class, 'gallery']);
