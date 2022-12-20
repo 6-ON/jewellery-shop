@@ -21,7 +21,16 @@ abstract class Model
             }
         }
     }
-
+    public function changes(Model $other)
+    {
+        $changes = [];
+        foreach ($this as $prop => $value) {
+            if (property_exists($other, $prop) && $value && $value != $other->{$prop}) {
+                $changes[$prop] = $value;
+            }
+        }
+        return $changes;
+    }
     public function validate(): bool
     {
         foreach ($this->rules() as $attr => $rules) {
@@ -57,12 +66,8 @@ abstract class Model
                     if ($record) {
                         $this->addRuleError($attr, self::RULE_UNIQUE, ['field' => $this->getLabel($attr)]);
                     }
-
                 }
-
-
             }
-
         }
         return empty($this->errors);
     }
@@ -112,5 +117,4 @@ abstract class Model
     {
         return $this->errors[$attr][0] ?? false;
     }
-
 }
