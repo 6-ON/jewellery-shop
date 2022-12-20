@@ -49,7 +49,7 @@ abstract class DbModel extends Model
         $stmt->execute();
         return $stmt->fetchObject(static::class);
     }
-    public static function getAll(bool $useView)
+    public static function getAll(bool $useView = false)
     {
         if ($useView) {
             $tableName = static::ViewName();
@@ -81,6 +81,9 @@ abstract class DbModel extends Model
     }
     public static function update($columns, $where)
     {
+        if (empty($columns)) {
+            return false;
+        }
         $tableName = static::tableName();
         $updateCols = array_keys($columns);
         $whereCols = array_keys($where);
@@ -100,4 +103,5 @@ abstract class DbModel extends Model
         
         return true;
     }
+
 }

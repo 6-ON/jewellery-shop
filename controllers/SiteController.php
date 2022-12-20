@@ -27,8 +27,8 @@ class SiteController extends Controller
     public function gallery(Request $request)
     {
         if ($request->isGet()) {
-            $products = Product::getAll(false);
-            $categories = Category::getAll(false);
+            $products = Product::getAll();
+            $categories = Category::getAll();
             return $this->render(
                 'gallery',
                 [
