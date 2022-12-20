@@ -11,11 +11,11 @@ use app\core\Form\Form;
         </h2>
     </div>
     <div class="container">
-        <?php $form = Form::begin('', 'post'); ?>
+        <?php $form = Form::begin('', 'post',true); ?>
         <?php echo $form->field($product, 'label') ?>
-        <?php echo $form->field($product, 'price')->numberField() ?>
+        <?php echo $form->field($product, 'price')->numberField()->isDecimal() ?>
         <?php echo $form->field($product, 'quantity')->numberField() ?>
-        <?php echo $form->select($product, 'categoryId',$cat_ds) ?>
+        <?php echo $form->select($product, 'categoryId',$cat_ds,$label_column,$FK) ?>
 
         <?php echo $form->field($product, 'image')->fileField() ?>
         <div class="d-flex justify-content-center">
