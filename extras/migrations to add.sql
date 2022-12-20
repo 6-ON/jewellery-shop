@@ -30,3 +30,4 @@ CREATE VIEW productsV
 AS
 SELECT P.*,C.label as category FROM product P JOIN category C ON P.`categoryId` = C.id;
 SELECT * from productsv;
+
