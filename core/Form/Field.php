@@ -12,6 +12,7 @@ class Field
     public const TYPE_NUMBER = 'number';
     public const TYPE_FILE = 'file';
 
+    public $decimal = '';
 
     public Model $model;
     public string $attr;
@@ -44,6 +45,11 @@ class Field
         $this->type = self::TYPE_NUMBER;
         return $this;
     }
+    public function isDecimal() : Field
+    {
+        $this->decimal ='step="0.01"';
+        return $this;
+    }
     public function fileField(): Field
     {
         $this->type = self::TYPE_FILE;
@@ -56,7 +62,7 @@ class Field
         return sprintf('
            <div class="mb-3">
               <label class="form-label">%s</label>
-               <input type="%s" name="%s" value="%s" class="form-control %s">
+               <input type="%s" name="%s" value="%s" class="form-control %s" '. $this->decimal .'>
                <div class="invalid-feedback">%s</div>
            </div>
            ', $this->model->getLabel($this->attr),
